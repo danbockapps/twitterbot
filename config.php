@@ -16,6 +16,17 @@ foreach($requiredConstants as $rc) {
   }
 }
 
+$fh = fopen('repertoire.txt', 'r');
+while($line = fgets($fh)){
+  $repertoire[] = $line;
+}
+fclose($fh);
+
+function getTweetText() {
+  global $repertoire;
+  return $repertoire[rand(0, count($repertoire) - 1)];
+}
+
 function echon($s) {
   echo $s . "\n";
 }
