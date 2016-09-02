@@ -3,3 +3,7 @@ error_log
 libraries
 password.txt
 recycle_bin
+.htaccess
+log.txt
+logshort.txt
+nohup.out
