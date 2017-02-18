@@ -7,14 +7,15 @@ class Consumer extends OauthPhirehose {
   public function enqueueStatus($status) {
     $decoded = json_decode($status);
     if(tweetToMe($decoded)) {
-      logtxt("Tweet to me!");
-      logtxt($decoded->user->screen_name . ': ' . $decoded->text);
       reply($decoded, getReplyText());
     }
 
     if(tweetByUser($decoded, "HillaryClinton")) {
-      logtxt("Tweet by Hillary!");
       logtxt($decoded->user->screen_name . ': ' . $decoded->text);
+    }
+
+    if(tweetByUser($decoded, "realDonaldTrump")) {
+      reply($decoded, getTrumpReplyText());
     }
   }
 }

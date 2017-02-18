@@ -30,9 +30,22 @@ while($line = fgets($fh)){
 }
 fclose($fh);
 
+$fh = fopen('trumpquestions.txt', 'r');
+while($line = fgets($fh)){
+  if(strlen($line) > 1) {
+    $trumpQuestions[] = $line;
+  }
+}
+fclose($fh);
+
 function getReplyText() {
   global $repertoire;
   return $repertoire[rand(0, count($repertoire) - 1)];
+}
+
+function getTrumpReplyText() {
+  global $trumpQuestions;
+  return $trumpQuestions[rand(0, count($trumpQuestions) - 1)];
 }
 
 function echon($s) {
@@ -94,7 +107,7 @@ function reply($decoded, $tweetText) {
     'in_reply_to_status_id' => $decoded->id
   ];
   $reply = $cb->statuses_update($params);
-  if($reply->httpStatus != 200) {
+  if($reply->httpStatus != "200") {
     logtxt(print_r($reply, true));
   }
 }
